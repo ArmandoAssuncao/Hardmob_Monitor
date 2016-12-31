@@ -1,0 +1,10 @@
+{
+    "name": {
+        "message": "Hardmob Monitor",
+        "description": "Nome da extensao"
+    },
+    "description": {
+        "message": "Monitora o site hardmob",
+        "description": "Descricao da extensao"
+    }
+}

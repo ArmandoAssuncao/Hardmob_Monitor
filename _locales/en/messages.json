@@ -1,0 +1,10 @@
+{
+    "name": {
+        "message": "Hardmob Monitor",
+        "description": "Extension name"
+    },
+    "description": {
+        "message": "Monitoring hardmob site",
+        "description": "Extension description"
+    }
+}

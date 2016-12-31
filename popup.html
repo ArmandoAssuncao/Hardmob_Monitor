@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <Title>Hardmob Monitor</Title>
+        <meta charset="UTF-8" />
+        <meta name="author" content="Armando Assunção" />
+        <link rel="stylesheet" href="static/third_party/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="static/third_party/bootstrap-tagsinput/bootstrap-tagsinput.css" />
+        <link rel="stylesheet" href="static/third_party/bootstrap-slider/bootstrap-slider.min.css" />
+        <link rel="stylesheet" href="static/third_party/bootstrap-toggle/bootstrap-toggle.min.css" />
+        
+        <link rel="stylesheet" href="static/css/popup.css" />
+    </head>
+    <body>
+        <main>
+            <div class="center-block container-main">
+                <div>
+                    <header><h1 id="body_title">Hardmob Monitor</h1></header>
+                </div>
+                <div class="container-word-tags center-block">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <span class="texts-information">Insira as palavras que deseja monitorar. Ex:(bicicleta, bike, Celular, ios)</span>
+                    </div>
+                    <select id="word_tags" multiple data-role="tagsinput">
+                        <option value="Android">Android</option>
+                    </select>
+                </div>
+
+                <div class="container-interval center-block">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <span class="texts-information">Intervalo entre cada pesquisa. (minuto, hora ou dia)</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container-slider col-xs-6 col-sm-6 col-md-6">
+                            <input id="time_interval" data-slider-id='slider_time_interval' type="text" data-slider-min="2" data-slider-max="20" data-slider-step="60000" data-slider-value="140" />
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div id="interval_radios" class="container-radios-interval center-block">
+                                <label class="radio-inline">
+                                    <input type="radio" name="interval-radio" id="interval_radio_min" value="interval_minute" checked /> minuto
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="interval-radio" id="interval_radio_hour" value="interval_hour" /> hora
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="interval-radio" id="interval_radio_day" value="interval_day" /> dia
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-submit">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <input type="checkbox" data-toggle="toggle" id="toggle_monitoring" data-class="fast" >
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <button id="btn_save" type="button" class="btn btn-default">Salvar Configurações</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="container-submit">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <table id="table_threads" class="table table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tópico</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Tópico 2<br />Link Tópico 1</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Tópico 2<br />Link Tópico 2</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Tópico 3<br />Link Tópico 3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script src="static/third_party/bootstrap/js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="static/third_party/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+        <script type="text/javascript" src="static/third_party/bootstrap-slider/bootstrap-slider.min.js"></script>
+        <script type="text/javascript" src="static/third_party/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+        <script type="text/javascript" src="static/js/popup.js"></script>
+    </body>
+</html>
