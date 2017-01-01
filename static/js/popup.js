@@ -16,12 +16,14 @@ function loadBackgroundPage(){
 }
 
 let ARRAY_WORDS;
+let THREADS;
 let TIME_INTERVAL = {};
 let SET_STATE_MONITORING;
 
 function loadStorage(){
     chrome.storage.sync.get(function(obj){
         ARRAY_WORDS = obj.words;
+        THREADS = obj.threads;
         SET_STATE_MONITORING = obj.set_state_monitoring;
         TIME_INTERVAL.time = obj.time_interval.time;
         TIME_INTERVAL.type = obj.time_interval.type;
@@ -44,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function setElementsValues(){
     defineWords();
+    defineThreads();
 
     //define slider
     if(TIME_INTERVAL.type === 'MINUTE')
@@ -105,6 +108,28 @@ function defineWords(){
 
     ARRAY_WORDS.forEach(function(elem){
         $('#word_tags').tagsinput('add', elem);
+    });
+}
+
+function defineThreads(){
+    let table = $('#table_threads tbody');
+
+    THREADS.forEach(function(elem, index){
+        let elementTr = $('<tr>');
+        let elementTh = $('<th>');
+        let elementTd = $('<td>');
+        let elementA = $('<a>');
+
+        elementTh.text(index+1);
+
+        elementTd.append(elementA);
+        elementA.attr('href', elem.link);
+        elementA.attr('target', '_blank');
+        elementA.text(elem.title);
+
+        elementTr.append(elementTh).append(elementTd);
+
+        table.append(elementTr);
     });
 }
 

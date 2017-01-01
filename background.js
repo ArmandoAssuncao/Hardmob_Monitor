@@ -61,7 +61,7 @@ var backgroundFunction = function(opt, val){
 }
 
 function setWords(words){
-    const sanitizedWords = words.filter(function(word){
+    const sanitizedWords = words.map(function(word){
         if(word !== undefined && word !== "" && typeof word === 'string')
             return word.trim().toLowerCase();
     });
