@@ -146,9 +146,19 @@ function searchWords(text){
         ARRAY_WORDS.forEach(function(word){
             if(threadTitle.toLowerCase().search(word) != -1){
                 let obj = {'title': threadTitle, 'link': threadLink};
+
+                //to next thread, if duplicate
+                for(let i=0; i < arrayThread.length; i++)
+                    if(obj.link === arrayThread[i].link)
+                        return;
+
                 arrayThread.push(obj);
             }            
         });
+    });
+
+    chrome.storage.sync.set({'threads': arrayThread}, function(){
+        console.log("set storage threads"); // TODO: delete callback
     });
 
     console.log(arrayThread); // TODO: delete
