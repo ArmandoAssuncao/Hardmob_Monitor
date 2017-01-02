@@ -19,23 +19,19 @@ body {
     text-align: center;
 }
 
-.container-word-tags {
-    height: 80px;
-}
-
 #word_tags {
     min-width: 100%;
 }
 
 .bootstrap-tagsinput {
-    height: 100%;
+    min-height: 60px;
     width: 100%;
 }
 
 .container-interval {
     width: 100%;
     padding: 0 20px;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .container-slider {
