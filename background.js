@@ -1,5 +1,8 @@
 'use strict';
 
+//set Color badge
+chrome.browserAction.setBadgeBackgroundColor({ color: [68, 138, 255, 255] });
+
 var CONSTANTS = (function() {
      const privateVars = {
          'URL': 'http://www.hardmob.com.br/promocoes/',
@@ -157,11 +160,7 @@ function searchWords(text){
         });
     });
 
-    chrome.storage.sync.set({'threads': arrayThread}, function(){
-        console.log("set storage threads"); // TODO: delete callback
-    });
-
-    console.log(arrayThread); // TODO: delete
+    saveThreadsInStorage(arrayThread);
 }
 
 function StartOrStopMonitoring(){
@@ -183,4 +182,20 @@ function StartOrStopMonitoring(){
             searchWords(req.responseText);
         });
     }, interval);
+
+    sendRequest(CONSTANTS.get('URL'), function(req){
+        searchWords(req.responseText);
+    });
+}
+
+
+function saveThreadsInStorage(threads){
+    chrome.storage.sync.set({'threads': threads}, function(){
+        console.log("set storage threads"); // TODO: delete callback
+    });
+
+    //set badge text
+    chrome.browserAction.setBadgeText({text: threads.length.toString()});
+
+    console.log(threads); // TODO: delete
 }
