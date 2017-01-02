@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     instanceToggle();
 });
 
+
 function setElementsValues(){
     defineWords();
     defineThreads();
@@ -65,12 +66,11 @@ function setElementsValues(){
     $('#btn_save').click(function(){
         saveWordsInStorage();
         saveIntervalInStorage();
+        disableSaveButton();
     });
 
     saveStateMonitoringInStorage();
 }
-
-
 
 function instanceTagsInput(val, minVal, maxVal, strTypeVal){
     $('#word_tags').tagsinput({
@@ -174,4 +174,12 @@ function saveStateMonitoringInStorage(){
     $('#toggle_monitoring').change(function() {
         backgroundFunction(OPTIONS.set_state_monitoring, $(this).prop('checked'));
     });
+}
+
+//Disables button to avoid consecutive clicks
+function disableSaveButton(){
+    setTimeout(function(){
+        $('#btn_save').attr('disabled', false);
+    }, 5000);
+    $('#btn_save').attr('disabled', true);
 }
