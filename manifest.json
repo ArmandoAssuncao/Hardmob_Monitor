@@ -1,7 +1,7 @@
 {
   "name": "__MSG_name__",
   "description": "__MSG_description__",
-  "version": "0.0.1",
+  "version": "0.4.0",
   "permissions": [
     "http://www.hardmob.com.br/",
     "storage"

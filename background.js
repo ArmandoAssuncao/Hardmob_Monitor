@@ -26,7 +26,7 @@ var CONSTANTS = (function() {
     };
 })();
 
-let ARRAY_WORDS;
+let TAGS;
 let ID_INTERVAL;
 let TIME_INTERVAL = {};
 let SET_STATE_MONITORING;
@@ -35,7 +35,7 @@ let SET_STATE_MONITORING;
 chrome.storage.sync.get(function(obj){
     console.log("Load words"); //TODO: delete
     console.log('OBJ:', obj); //TODO: delete
-    ARRAY_WORDS = obj.words;
+    TAGS = obj.words;
     SET_STATE_MONITORING = obj.set_state_monitoring || true;
     TIME_INTERVAL.time = obj.time_interval.time || CONSTANTS.get('INTERVAL').MIN_HOUR;
     TIME_INTERVAL.type = obj.time_interval.type || 'HOUR';
@@ -69,7 +69,7 @@ function setWords(words){
             return word.trim().toLowerCase();
     });
 
-    ARRAY_WORDS = new Set(sanitizedWords);
+    TAGS = new Set(sanitizedWords);
 
     //save words
     chrome.storage.local.remove('words');
@@ -134,29 +134,41 @@ function sendRequest(url, callback) {
 function searchWords(text){
     let arrayThread = [];
 
-    let elementHtml = document.createElement("html");
+    const elementHtml = document.createElement("html");
     elementHtml.innerHTML = text;
-    let threads = elementHtml.querySelector("#threads");
+    const threads = elementHtml.querySelector("#threads");
     let threadsTitle = threads.querySelectorAll(".threadtitle");
 
-    // Get title and link thread
-    threadsTitle.forEach(function(elem, index){
-        let thread = elem.querySelector("a.title");
-        let threadLink = thread.href;
-        let threadTitle = thread.textContent;
 
-        // Check if have the words in titles
-        ARRAY_WORDS.forEach(function(word){
-            if(threadTitle.toLowerCase().search(word) != -1){
+    // Check if have the words in titles
+    TAGS.forEach(function(tag){
+        //separate tag in words, if necessary
+        const words = tag.split('&&').map(function(elem){return elem.trim()});
+
+        // return new array without threads duplicates
+        threadsTitle = [].filter.call(threadsTitle, function(elem){
+            let thread = elem.querySelector("a.title");
+            let threadLink = thread.href;
+            let threadTitle = thread.textContent;
+
+            let contains = true;
+
+            //check if thread title contains all words
+            for (let i=0; i < words.length; i++) {
+                if(threadTitle.toLowerCase().search(words[i]) == -1){
+                    contains = false;
+                    break;
+                }
+            }
+
+            //insert obj
+            if(contains){
                 let obj = {'title': threadTitle, 'link': threadLink};
-
-                //to next thread, if duplicate
-                for(let i=0; i < arrayThread.length; i++)
-                    if(obj.link === arrayThread[i].link)
-                        return;
-
                 arrayThread.push(obj);
-            }            
+                return false;
+            }
+
+            return true;
         });
     });
 
