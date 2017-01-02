@@ -4,7 +4,7 @@ var CONSTANTS = (function() {
      const privateVars = {
          'URL': 'http://www.hardmob.com.br/promocoes/',
          'INTERVAL': {
-             'MIN_MINUTE': 20, // 20 min
+             'MIN_MINUTE': 30, // 20 min
              'MAX_MINUTE': 59, // 59 mins
              'MIN_HOUR': 1, //1 hour
              'MAX_HOUR': 20, //20 hours
