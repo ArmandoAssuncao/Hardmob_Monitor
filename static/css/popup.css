@@ -34,11 +34,12 @@ body {
 
 .container-interval {
     width: 100%;
+    padding: 0 20px;
     margin-top: 50px;
 }
 
 .container-slider {
-    padding-left: 50px;
+    padding-left: 30px;
 }
 
 #slider_time_interval {
@@ -50,11 +51,16 @@ body {
 }
 
 .container-radios-interval {
-    //margin-left: 40px;
+    padding-left: 20px;
 }
 
 .container-submit {
+    padding: 0 20px;
     margin-top: 30px;
+}
+
+#btn_save {
+    float:right;
 }
 
 #table_threads {
