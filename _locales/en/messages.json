@@ -1,10 +1,10 @@
 {
     "name": {
-        "message": "Hardmob Monitor",
+        "message": "Hardmob Promotions Monitor",
         "description": "Extension name"
     },
     "description": {
-        "message": "Monitoring hardmob site",
+        "message": "Monitors the promotions area of hardmob.com.br",
         "description": "Extension description"
     }
 }
