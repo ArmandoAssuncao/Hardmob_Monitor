@@ -7,7 +7,7 @@ var CONSTANTS = (function() {
      const privateVars = {
          'URL': 'http://www.hardmob.com.br/promocoes/',
          'INTERVAL': {
-             'MIN_MINUTE': 30, // 20 min
+             'MIN_MINUTE': 30, // 30 min
              'MAX_MINUTE': 59, // 59 mins
              'MIN_HOUR': 1, //1 hour
              'MAX_HOUR': 20, //20 hours
@@ -31,18 +31,42 @@ let ID_INTERVAL;
 let TIME_INTERVAL = {};
 let SET_STATE_MONITORING;
 
-
 chrome.storage.sync.get(function(obj){
     console.log("Load words"); //TODO: delete
     console.log('OBJ:', obj); //TODO: delete
+
+    //storage not empty
+    if(Object.keys(obj).length !== 0){
+        initVariables(obj);
+    }
+    else{
+        //set default values
+        obj.words = [];
+        obj.set_state_monitoring = true;
+        obj.time_interval = {
+            time: CONSTANTS.get('INTERVAL').MIN_HOUR,
+            type: 'HOUR'
+        };
+
+        //set in storage and init variables
+        chrome.storage.sync.set(obj, function(){
+            chrome.storage.sync.get(function(obj){
+                initVariables(obj)
+            });
+        });
+    }
+});
+
+function initVariables(obj){
     TAGS = obj.words;
-    SET_STATE_MONITORING = obj.set_state_monitoring || true;
-    TIME_INTERVAL.time = obj.time_interval.time || CONSTANTS.get('INTERVAL').MIN_HOUR;
-    TIME_INTERVAL.type = obj.time_interval.type || 'HOUR';
+    SET_STATE_MONITORING = obj.set_state_monitoring;
+
+    TIME_INTERVAL.time = obj.time_interval.time;
+    TIME_INTERVAL.type = obj.time_interval.type;
 
     if(SET_STATE_MONITORING)
         StartOrStopMonitoring();
-});
+}
 
 //execute options
 var backgroundFunction = function(opt, val){
