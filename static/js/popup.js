@@ -28,8 +28,6 @@ function loadStorage(){
         TIME_INTERVAL.time = obj.time_interval.time;
         TIME_INTERVAL.type = obj.time_interval.type;
 
-        console.log('OBJ: ', obj); // TODO: console
-
         setElementsValues();
     });
 }

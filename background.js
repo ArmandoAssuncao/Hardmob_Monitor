@@ -32,9 +32,6 @@ let TIME_INTERVAL = {};
 let SET_STATE_MONITORING;
 
 chrome.storage.sync.get(function(obj){
-    console.log("Load words"); //TODO: delete
-    console.log('OBJ:', obj); //TODO: delete
-
     //storage not empty
     if(Object.keys(obj).length !== 0){
         initVariables(obj);
@@ -72,8 +69,6 @@ function initVariables(obj){
 var backgroundFunction = function(opt, val){
     var msg = {option: opt, values: val};
 
-    console.log('MSG: ', msg); //TODO: delete
-
     switch(msg.option) {
         case CONSTANTS.get('OPTIONS').set_words:
             setWords(msg.values);
@@ -97,9 +92,7 @@ function setWords(words){
 
     //save words
     chrome.storage.local.remove('words');
-    chrome.storage.sync.set({'words': sanitizedWords}, function(){
-        console.log("set storage"); // TODO: delete callback
-    });
+    chrome.storage.sync.set({'words': sanitizedWords});
 }
 
 function setTimeInterval(time, type){
@@ -117,9 +110,7 @@ function setTimeInterval(time, type){
     TIME_INTERVAL.time = time;
     TIME_INTERVAL.type= type;
 
-    chrome.storage.sync.set({'time_interval': TIME_INTERVAL}, function(){
-        console.log("set storage interval"); // TODO: delete callback
-    });
+    chrome.storage.sync.set({'time_interval': TIME_INTERVAL});
 
     StartOrStopMonitoring();
 }
@@ -129,9 +120,7 @@ function setStateMonitoring(val){
     
     SET_STATE_MONITORING = val;
 
-    chrome.storage.sync.set({'set_state_monitoring': SET_STATE_MONITORING}, function(){
-        console.log("set storage"); // TODO: delete callback
-    });
+    chrome.storage.sync.set({'set_state_monitoring': SET_STATE_MONITORING});
 
     StartOrStopMonitoring();
 }
@@ -226,12 +215,8 @@ function StartOrStopMonitoring(){
 
 
 function saveThreadsInStorage(threads){
-    chrome.storage.sync.set({'threads': threads}, function(){
-        console.log("set storage threads"); // TODO: delete callback
-    });
+    chrome.storage.sync.set({'threads': threads});
 
     //set badge text
     chrome.browserAction.setBadgeText({text: threads.length.toString()});
-
-    console.log(threads); // TODO: delete
 }
