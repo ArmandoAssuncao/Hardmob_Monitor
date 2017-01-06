@@ -126,7 +126,7 @@ function setStateMonitoring(val){
 }
 
 function sendRequest(url, callback) {
-    var req = new XMLHttpRequest();
+    let req = new XMLHttpRequest();
     if (!req) return;
 
     const method = "GET";
@@ -137,7 +137,12 @@ function sendRequest(url, callback) {
             console.log('HTTP error: ' + req.status);
             return;
         }
-        callback(req);
+        const text = req.responseText;
+
+        req.onreadystatechange = null;
+        req = null;
+
+        callback(text);
     }
 
     req.open(method, url, true);
@@ -203,13 +208,13 @@ function StartOrStopMonitoring(){
     }
 
     ID_INTERVAL = setInterval(function(){
-        sendRequest(CONSTANTS.get('URL'), function(req){
-            searchWords(req.responseText);
+        sendRequest(CONSTANTS.get('URL'), function(reqText){
+            searchWords(reqText);
         });
     }, interval);
 
-    sendRequest(CONSTANTS.get('URL'), function(req){
-        searchWords(req.responseText);
+    sendRequest(CONSTANTS.get('URL'), function(reqText){
+        searchWords(reqText);
     });
 }
 
