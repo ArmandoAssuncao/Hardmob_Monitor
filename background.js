@@ -223,5 +223,10 @@ function saveThreadsInStorage(threads){
     chrome.storage.sync.set({'threads': threads});
 
     //set badge text
-    chrome.browserAction.setBadgeText({text: threads.length.toString()});
+    if(threads.length == 0){
+        chrome.browserAction.setBadgeText({text: '' });
+    }
+    else{
+        chrome.browserAction.setBadgeText({text: threads.length.toString()});
+    }
 }
