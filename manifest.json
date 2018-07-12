@@ -4,7 +4,8 @@
     "version": "0.4.3",
     "permissions": [
         "http://www.hardmob.com.br/",
-        "storage"
+        "storage",
+        "notifications"
     ],
     "icons": {
         "16": "icon16.png",
@@ -13,6 +14,9 @@
         "64": "icon64.png",
         "128": "icon.png"
     },
+    "web_accessible_resources": [
+        "icon48.png"
+    ],
     "background": {
     "scripts": ["background.js"],
     "persistent": true

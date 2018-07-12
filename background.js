@@ -219,6 +219,23 @@ function StartOrStopMonitoring(){
 }
 
 
+function fireNotification(threads){
+    let msg = "";
+    for (let i = 0; i < threads.length; i++) {
+        msg += threads[i].title + "\n";
+    }
+    let opt = {
+        type: "basic",
+        title: "Novas promoções no Hardmob!",
+        message: msg,
+        iconUrl: "icon48.png"
+    };
+    let notification = chrome.notifications.create("novasPromocoes", opt);
+
+    // Then show the notification.
+    notification.show();
+}
+
 function saveThreadsInStorage(threads){
     chrome.storage.sync.set({'threads': threads});
 
@@ -228,5 +245,6 @@ function saveThreadsInStorage(threads){
     }
     else{
         chrome.browserAction.setBadgeText({text: threads.length.toString()});
+        fireNotification(threads);
     }
 }
