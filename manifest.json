@@ -3,7 +3,7 @@
     "description": "__MSG_description__",
     "version": "0.4.4",
     "permissions": [
-        "http://www.hardmob.com.br/",
+        "https://www.hardmob.com.br/",
         "storage",
         "notifications"
     ],

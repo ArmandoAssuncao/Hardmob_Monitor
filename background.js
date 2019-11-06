@@ -5,7 +5,7 @@ chrome.browserAction.setBadgeBackgroundColor({ color: [68, 138, 255, 255] });
 
 var CONSTANTS = (function() {
      const privateVars = {
-         'URL': 'http://www.hardmob.com.br/promocoes/',
+         'URL': 'https://www.hardmob.com.br/forums/407-Promocoes',
          'INTERVAL': {
              'MIN_MINUTE': 30, // 30 min
              'MAX_MINUTE': 59, // 59 mins
