@@ -4,8 +4,10 @@
 chrome.browserAction.setBadgeBackgroundColor({ color: [68, 138, 255, 255] });
 
 var CONSTANTS = (function() {
+     const HOST = 'https://www.hardmob.com.br'
      const privateVars = {
-         'URL': 'https://www.hardmob.com.br/forums/407-Promocoes',
+         HOST: HOST,
+         'URL': HOST + '/forums/407-Promocoes',
          'INTERVAL': {
              'MIN_MINUTE': 30, // 30 min
              'MAX_MINUTE': 59, // 59 mins
@@ -166,7 +168,7 @@ function searchWords(text){
         // return new array without threads duplicates
         threadsTitle = [].filter.call(threadsTitle, function(elem){
             let thread = elem.querySelector("a.title");
-            let threadLink = thread.href;
+            let threadLink = CONSTANTS.get('HOST') + '/' + thread.getAttribute('href');
             let threadTitle = thread.textContent;
 
             let contains = true;
