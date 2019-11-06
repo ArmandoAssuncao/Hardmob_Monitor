@@ -232,10 +232,8 @@ function fireNotification(threads){
         message: msg,
         iconUrl: "icon48.png"
     };
-    let notification = chrome.notifications.create("novasPromocoes", opt);
 
-    // Then show the notification.
-    notification.show();
+    chrome.notifications.create("novasPromocoes", opt);
 }
 
 function saveThreadsInStorage(threads){
